@@ -1,0 +1,48 @@
+name: wanandroid
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  # 网络库 dio
+  dio: ^5.2.0
+
+  get:
+  dio_cookie_manager: ^2.0.0
+  gap: ^2.0.2
+  logger: ^1.0.0
+  cookie_jar: ^3.0.1
+  google_fonts: ^5.0.0
+  transparent_image: ^2.0.1
+  adaptive_breakpoints: ^0.1.1
+  dual_screen: ^1.0.4
+  json_serializable: ^6.7.0
+  shared_preferences: ^2.1.2
+  fluentui_icons: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.5
+  json_serializable: ^6.7.0
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - images/
+    - images/logo.png
+
