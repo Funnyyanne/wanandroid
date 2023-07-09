@@ -3,8 +3,8 @@ import 'root_model.dart';
 part  'banner_model.g.dart';
 
 @JsonSerializable()
-class BannerModel extends RootModel<BannerData> {
-  BannerModel(BannerData data, int errorCode, String errorMsg)
+class BannerModel extends RootModel<List<BannerData>> {
+  BannerModel(List<BannerData> data, int errorCode, String errorMsg)
       : super(data, errorCode, errorMsg);
 
   factory BannerModel.fromJson(Map<String, dynamic> json) =>

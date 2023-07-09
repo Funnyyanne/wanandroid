@@ -7,7 +7,9 @@ part of 'banner_model.dart';
 // **************************************************************************
 
 BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel(
-      BannerData.fromJson(json['data'] as Map<String, dynamic>),
+      (json['data'] as List<dynamic>)
+          .map((e) => BannerData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['errorCode'] as int,
       json['errorMsg'] as String,
     );

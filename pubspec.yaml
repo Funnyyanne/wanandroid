@@ -17,7 +17,7 @@ dependencies:
   # 网络库 dio
   dio: ^5.2.0
 
-  get:
+  get: ^4.6.5
   dio_cookie_manager: ^2.0.0
   gap: ^2.0.2
   logger: ^1.0.0
@@ -32,6 +32,10 @@ dependencies:
 
   # https://github.com/xuelongqy/flutter_easyrefresh
   easy_refresh: ^3.3.1
+  card_swiper: ^2.0.4
+  flutter_inappwebview: ^5.7.2+3
+#  flutter_webview_plugin: flutter_inappwebview代替
+#    git: https://github.com/nuc134r/flutter_webview_plugin.git
 
 dev_dependencies:
   flutter_test:

@@ -56,14 +56,13 @@ class ArticleData {
   int chapterId;
   int superChapterId;
   int id;
-  int originId;
+  // int originId;
   bool fresh;
   bool collect;
   int courseId;
   String desc;
 
-  ArticleData(
-      this.superChapterName,
+  ArticleData(this.superChapterName,
       this.publishTime,
       this.visible,
       this.niceDate,
@@ -83,11 +82,12 @@ class ArticleData {
       this.chapterId,
       this.superChapterId,
       this.id,
-      this.originId,
+      // this.originId,
       this.fresh,
       this.collect,
       this.courseId,
       this.desc);
+
   factory ArticleData.fromJson(Map<String, dynamic> json) =>
       _$ArticleDataFromJson(json);
 
@@ -96,7 +96,6 @@ class ArticleData {
   }
 
 }
-
 
 
 @JsonSerializable()
