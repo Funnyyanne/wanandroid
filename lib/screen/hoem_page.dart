@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
+    {
   List<BannerData> bannerData = [];
   List<ArticleData> articleData = [];
   late EasyRefreshController _easyRefreshController;
@@ -50,8 +50,7 @@ class _HomePageState extends State<HomePage>
       var bannerModel = BannerModel.fromJson(bannerMap);
 
       //article
-      var articleResponse =
-          await HttpUtil().get("${Api.BASE_URL+Api.ARTICLE_LIST+page.toString()}/json");
+      var articleResponse = await HttpUtil().get("${Api.BASE_URL+Api.ARTICLE_LIST+page.toString()}/json");
       Map<String, dynamic> articleMap = json.decode(articleResponse.toString());
       var articleModel = ArticleModel.fromJson(articleMap);
 
@@ -60,6 +59,7 @@ class _HomePageState extends State<HomePage>
         articleData = articleModel.data.datas;
         print("articleData:$articleData");
       });
+
       _swiperController.startAutoplay();
     } catch (e) {
       Log.e(e);
@@ -77,7 +77,9 @@ class _HomePageState extends State<HomePage>
           safeArea: false,
         ),
         footer: PhoenixFooter(
-            skyColor: Styles.primaryColor, position: IndicatorPosition.locator),
+            skyColor: Styles.primaryColor,
+            position: IndicatorPosition.locator
+        ),
         onRefresh: () async {
           await Future.delayed(Duration(seconds: 2), () {
             if (!mounted) {
@@ -93,7 +95,7 @@ class _HomePageState extends State<HomePage>
           });
         },
         onLoad: () async {
-          await Future.delayed(Duration(seconds: 3), () {
+          await Future.delayed(Duration(seconds: 1), () {
             if (!mounted) {
               return;
             }
@@ -102,8 +104,7 @@ class _HomePageState extends State<HomePage>
             });
             loadMoreData();
 
-            _easyRefreshController.finishRefresh(
-                hasMore ? IndicatorResult.success : IndicatorResult.noMore);
+            _easyRefreshController.finishRefresh(hasMore ? IndicatorResult.success : IndicatorResult.noMore);
           });
         },
         childBuilder: (BuildContext context, ScrollPhysics physics) {
@@ -112,8 +113,7 @@ class _HomePageState extends State<HomePage>
             slivers: [
               SliverAppBar(
                 backgroundColor: Styles.primaryColor,
-                expandedHeight: AppLayout.getScreenWidth() / 1.8 * 0.8 + 20,
-                // +20 是上下的padding值,
+                expandedHeight: AppLayout.getScreenWidth() / 1.8 * 0.8 + 20, // +20 是上下的padding值,
                 pinned: false,
                 flexibleSpace: FlexibleSpaceBar(
                   background: getBanner(),
@@ -131,10 +131,6 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
-
 
   Future loadMoreData() async {
     var response = await HttpUtil().get("${Api.ARTICLE_LIST}$page/json");
@@ -217,9 +213,11 @@ class _HomePageState extends State<HomePage>
   }
 
   Future addCollect(int id) async {
+    print("addCollect id is :$id");
     var collectResponse = await HttpUtil().post('${Api.COLLECT}$id/json');
     Map<String,dynamic> map = json.decode(collectResponse.toString());
     var entity = ExtendRootModel.fromJson(map);
+    print("addCollect result is $entity");
     if (entity.errorCode == -1001) {
       Toast.show( context, entity.errorMsg);
 

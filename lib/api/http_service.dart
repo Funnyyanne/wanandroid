@@ -8,9 +8,9 @@ class HttpService {
     return  HttpUtil().post(Api.BASE_URL + Api.LOGIN, data:data);
   }
 
-  Future register(String user, String password) async {
+  Future register(String user, String password,String rePassword) async {
     var data;
-    data = {'username': user, 'password': password,'repassword':password};
+    data = {'username': user, 'password': password,'repassword':rePassword};
     return await HttpUtil().post(Api.BASE_URL + Api.REGISTER, data: data);
   }
 

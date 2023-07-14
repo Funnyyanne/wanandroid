@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/utils/app_styles.dart';
 
+import '../api/api.dart';
+import '../network/HttpUtil.dart';
 import 'hoem_page.dart';
 
 class BottomBar extends StatefulWidget {
@@ -82,6 +84,57 @@ class _BottomBarState
           ),
         ],
       ),
+      drawer: showDrawer(context),
+    );
+  }
+
+  Widget showDrawer(BuildContext context) {
+    return Drawer(
+      child: ListTile(
+        leading: const Icon(Icons.block),
+        title: const Text("退出"),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () {
+          Navigator.of(context).pop();
+          showLogoutDialog(context);
+        },
+      ),
+    );
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('提示'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('确认退出吗？'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('取消', style: Styles.textStyle),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('确定'),
+              onPressed: () {
+                //退出
+                HttpUtil().get(Api
+                    .LOGOUT);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

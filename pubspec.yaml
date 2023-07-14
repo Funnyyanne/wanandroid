@@ -16,12 +16,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   # 网络库 dio
   dio: ^5.2.0
-
   get: ^4.6.5
-  dio_cookie_manager: ^2.0.0
+
   gap: ^2.0.2
   logger: ^1.0.0
+
   cookie_jar: ^3.0.1
+  dio_cookie_manager: ^2.0.0
+
   google_fonts: ^5.0.0
   transparent_image: ^2.0.1
   adaptive_breakpoints: ^0.1.1
@@ -29,10 +31,16 @@ dependencies:
   json_serializable: ^6.7.0
   shared_preferences: ^2.1.2
   fluentui_icons: ^1.0.0
+  provider: ^6.0.5
+  card_swiper: ^2.0.4
+
+  # 文件读写(文件夹路径)
+  path_provider: ^2.0.11
+  # sqlite数据库
+  sqflite: ^2.0.2+1
 
   # https://github.com/xuelongqy/flutter_easyrefresh
   easy_refresh: ^3.3.1
-  card_swiper: ^2.0.4
   flutter_inappwebview: ^5.7.2+3
 #  flutter_webview_plugin: flutter_inappwebview代替
 #    git: https://github.com/nuc134r/flutter_webview_plugin.git

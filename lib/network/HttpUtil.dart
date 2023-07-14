@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:wanandroid/api/api.dart';
 import '../common/log.dart';
 
@@ -26,11 +27,7 @@ class HttpUtil {
         //请求的Content-Type，默认值是"application/json; charset=utf-8",Headers.formUrlEncodedContentType会自动编码请求体.
         contentType: Headers.formUrlEncodedContentType,
         responseType: ResponseType.plain);
-    // DioForBrowser _d = DioForBrowser(options);
-    // var adapter = BrowserHttpClientAdapter();
-    // adapter.withCredentials = true;
-    // _d.httpClientAdapter = adapter;
-    // _d.get(Api.BASE_URL);
+
     dio = Dio(options);
 
     final cookieJar = CookieJar();
@@ -55,6 +52,8 @@ class HttpUtil {
       response = await dio.get(url,
           queryParameters: data, options: option, cancelToken: cancelToken);
       print('get success --- ${response.statusCode}');
+      print('get success---------${response.data}');
+
       return response;
 
       // print('get success --- ${response.data}');

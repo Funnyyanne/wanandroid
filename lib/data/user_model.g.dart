@@ -19,26 +19,37 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
     };
 
 DetailUser _$DetailUserFromJson(Map<String, dynamic> json) => DetailUser(
-      (json['chapterTops'] as List<dynamic>).map((e) => e as String).toList(),
-      (json['collectIds'] as List<dynamic>).map((e) => e as int).toList(),
-      json['email'] as String,
-      json['icon'] as String,
-      json['id'] as int,
-      json['password'] as String,
-      json['token'] as String,
-      json['type'] as int,
-      json['username'] as String,
+      chapterTops: (json['chapterTops'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      collectIds:
+          (json['collectIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      email: json['email'] as String? ?? "",
+      icon: json['icon'] as String? ?? "",
+      id: json['id'] as int,
+      password: json['password'] as String? ?? "",
+      token: json['token'] as String? ?? "",
+      type: json['type'] as int? ?? 0,
+      username: json['username'] as String?,
+      admin: json['admin'] as bool? ?? false,
+      coinCount: json['coinCount'] as int? ?? 0,
+      nickname: json['nickname'] as String,
+      publicName: json['publicName'] as String,
     );
 
 Map<String, dynamic> _$DetailUserToJson(DetailUser instance) =>
     <String, dynamic>{
       'chapterTops': instance.chapterTops,
       'collectIds': instance.collectIds,
+      'coinCount': instance.coinCount,
       'email': instance.email,
       'icon': instance.icon,
-      'id': instance.id,
       'password': instance.password,
+      'id': instance.id,
       'token': instance.token,
-      'type': instance.type,
+      'admin': instance.admin,
       'username': instance.username,
+      'nickname': instance.nickname,
+      'type': instance.type,
+      'publicName': instance.publicName,
     };

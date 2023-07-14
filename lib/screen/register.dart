@@ -1,33 +1,36 @@
 import 'dart:convert';
 
-import 'package:flutter/gestures.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:wanandroid/common/sp.dart';
-import 'package:wanandroid/screen/register.dart';
 import 'package:wanandroid/utils/app_layout.dart';
 import 'package:wanandroid/utils/app_styles.dart';
 
 import '../api/http_service.dart';
 import '../data/user_model.dart';
-import '../testlogin/MyApp.dart';
 import '../utils/toast.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginState();
+  State<RegisterPage> createState() => _RegisterState();
 }
 
-class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
-  bool isLogin = false;
-
-  // 是否隐藏输入的文本
-  bool obscureText = true;
-
+class _RegisterState extends State<RegisterPage>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
+  final TextEditingController _repwdController = TextEditingController();
+
+  // 是否隐藏输入的文本
+  bool obscurePassText = true;
+
+
+
+  // 是否正在注册
+  bool isOnLogin = false;
 
   @override
   void initState() {
@@ -36,6 +39,19 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var loadingView;
+    if (isOnLogin) {
+      loadingView = const Center(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[CupertinoActivityIndicator(), Text("注册中，请稍等...")],
+            ),
+          ));
+    } else {
+      loadingView = Center();
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -60,7 +76,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
                           fontSize: 25,
                           color: Colors.black)),
                   Text(
-                   "登录你的账户" ,
+                     "注册",
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 20,
@@ -83,7 +99,7 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
                   Gap(AppLayout.getHeigh(20)),
                   TextField(
                       controller: _pwdController,
-                      obscureText: true,
+                      obscureText: obscurePassText,
                       decoration: InputDecoration(
                           hintText: "请输入密码",
                           focusedBorder: OutlineInputBorder(
@@ -94,19 +110,35 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
                           ),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20)))),
+                  InkWell(
+                    child: Container(
+                      width: AppLayout.getWidth(100),//ScreenUtil.getInstance().setWidth(100),
+                      height: AppLayout.getWidth(100),
+                      alignment: Alignment.center,
+                      child: Image.asset("assets/images/ic_eye.png",
+                          width: AppLayout.getWidth(50),
+                          height: AppLayout.getWidth(50),
+                    )),
+                    onTap: () {
+                      setState(() {
+                        obscurePassText = !obscurePassText;
+                      });
+                    },
+                  ),
                   Gap(AppLayout.getHeigh(16)),
-                  Row(
-                    children: [
-                      Expanded(child: Container()),
-                      Text(
-                        "forget password？",
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20,
-                            color: Colors.grey.shade500),
-                      )
-                    ],
-                  )
+                  TextField(
+                      controller: _repwdController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: "请再次输入密码",
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color:
+                                    Styles.color_tags), // set the border color
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)))),
                 ],
               ),
             ),
@@ -119,61 +151,56 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
                         MaterialStateProperty.all<Color>(Colors.blue),
                   ),
                   onPressed: () {
-                    doLogin();
+                    doRegister(context);
                   },
                   child: Text(
-                     "登录" ,
+                    "注册并登录",
                     style: Styles.textStyle.copyWith(color: Colors.white),
                   )),
             ),
-            SizedBox(height: AppLayout.getScreenHeight() * .2),
-            RichText(
-              text: TextSpan(
-                  text: "还没有账号？",
-                  style: TextStyle(color: Colors.grey.shade500, fontSize: 20),
-                  children: [
-                    TextSpan(
-                        text: "创建",
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => RegisterPage()),
-                            );
-                          })
-                  ]),
-            )
+            Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: loadingView),
+                  ],
+                ))
           ],
         ),
       ),
     );
   }
 
-  void doLogin() async {
-
+  void doRegister(BuildContext context) async {
+    setState(() {
+      isOnLogin = true;
+    });
     var userNameStr = _userNameController.text;
     var pwdStr = _pwdController.text;
+    var rePwdSr = _repwdController.text;
     if (null == pwdStr || userNameStr.length < 6 || pwdStr.length < 6) {
       Toast.show(context, "账号/密码不符合标准");
+    }else if(pwdStr != rePwdSr){
+      Toast.show(context, "两次密码输入不一致！");
     } else {
-      var response = await HttpService().login(userNameStr, pwdStr);
+      FocusScope.of(context).requestFocus(FocusNode());
+
+      var response = await HttpService().register(userNameStr, pwdStr,rePwdSr);
+
       Map<String, dynamic> userMap = json.decode(response.toString());
       var userEntity = UserModel.fromJson(userMap);
       print("userEntity 输出 ${userEntity.data}");
-      setState(() {
-        isLogin ;
-      });
-      if (userEntity.errorCode == 0) {
-        Sp.saveLoginInfo(userEntity.data, userNameStr, pwdStr);
-        //跳转并关闭当前页面
-        Navigator.pop(context);
-        Toast.show(context, "登录成功");
 
+      if (userEntity.errorCode == 0) {
+        //跳转并关闭当前页面
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const BottomBar()),
+        //   (route) => route == null,
+        // );
+        //
+        Sp.saveLoginInfo(userEntity.data, userNameStr, pwdStr);
+        Navigator.pop(context);
+        Toast.show(context, "注册成功");
       } else {
         Toast.show(context, userMap['errorMsg']);
       }
@@ -182,8 +209,8 @@ class _LoginState extends State<LoginPage> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    _repwdController.dispose();
     _userNameController.dispose();
     _pwdController.dispose();
   }
