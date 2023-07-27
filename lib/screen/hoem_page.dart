@@ -150,22 +150,22 @@ class _HomePageState extends State<HomePage>
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
           child: ListTile(
-            leading: IconButton(
-              icon: articleData != null && articleData[index].collect
-                  ? Icon(
-                      Icons.favorite,
-                      color: Theme.of(context).primaryColor,
-                    )
-                  : Icon(Icons.favorite_border),
-              tooltip: '收藏',
-              onPressed: () {
-                if (articleData[index].collect) {
-                  cancelCollect(articleData[index].id);
-                } else {
-                  addCollect(articleData[index].id);
-                }
-              },
-            ),
+            // leading: IconButton(
+            //   icon: articleData != null && articleData[index].collect
+            //       ? Icon(
+            //           Icons.favorite,
+            //           color: Theme.of(context).primaryColor,
+            //         )
+            //       : Icon(Icons.favorite_border),
+            //   tooltip: '收藏',
+            //   onPressed: () {
+            //     if (articleData[index].collect) {
+            //       cancelCollect(articleData[index].id);
+            //     } else {
+            //       addCollect(articleData[index].id);
+            //     }
+            //   },
+            // ),
             title: Text(
               articleData[index].title,
               maxLines: 2,
