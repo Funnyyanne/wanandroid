@@ -13,6 +13,8 @@ class Styles{
   static Color color_black = const Color(0xFF000000);
   static Color color_dark_gray = const Color(0xFF6b6b6b);
   static Color color_white_a80 = const  Color(0xccffffff);
+  static Color color_F9F9F9 = const  Color(0xffF9F9F9);
+  // static Color color_white_a80 = const  Color(0xff666666);
 
   static TextStyle textStyle = TextStyle(fontSize: 16,color: textColor,fontWeight: FontWeight.w500);
   static TextStyle headLinesStyle1 = TextStyle(fontSize: 26,color: textColor,fontWeight: FontWeight.bold);

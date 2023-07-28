@@ -31,7 +31,7 @@ TreeList _$TreeListFromJson(Map<String, dynamic> json) => TreeList(
       json['courseId'] as int,
       json['parentChapterId'] as int,
       json['order'] as int,
-    )..isExpanded = json['isExpanded'] as bool;
+);
 
 Map<String, dynamic> _$TreeListToJson(TreeList instance) => <String, dynamic>{
       'visible': instance.visible,

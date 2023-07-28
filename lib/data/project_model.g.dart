@@ -30,7 +30,6 @@ ProjectDataModel _$ProjectDataModelFromJson(Map<String, dynamic> json) =>
       json['order'] as int,
       json['parentChapterId'] as int,
       json['visible'] as int,
-       // json['url'] as String ,
     );
 
 Map<String, dynamic> _$ProjectDataModelToJson(ProjectDataModel instance) =>
@@ -42,5 +41,4 @@ Map<String, dynamic> _$ProjectDataModelToJson(ProjectDataModel instance) =>
       'order': instance.order,
       'parentChapterId': instance.parentChapterId,
       'visible': instance.visible,
-      // 'url': instance.url,
     };

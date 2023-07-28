@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wanandroid/screen/navigation_page.dart';
 import 'package:wanandroid/screen/project_page.dart';
 import 'package:wanandroid/screen/tree_page.dart';
 import 'package:wanandroid/utils/app_styles.dart';
@@ -13,23 +14,18 @@ class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
 
   @override
-  State<BottomBar> createState() =>
-      _BottomBarState();
+  State<BottomBar> createState() => _BottomBarState();
 }
 
-class _BottomBarState
-    extends State<BottomBar> {
+class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     TreePage(),
     ProjectPage(),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    NaviPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -54,9 +50,8 @@ class _BottomBarState
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         selectedItemColor: Styles.primaryColor,
-        unselectedItemColor:  Styles.color_dark_gray,
+        unselectedItemColor: Styles.color_dark_gray,
         type: BottomNavigationBarType.fixed,
-
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
@@ -123,8 +118,7 @@ class _BottomBarState
               child: Text('确定'),
               onPressed: () {
                 //退出
-                HttpUtil().get(Api
-                    .LOGOUT);
+                HttpUtil().get(Api.LOGOUT);
                 Navigator.of(context).pop();
               },
             ),
