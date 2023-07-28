@@ -10,7 +10,6 @@ class TreeModel extends RootModel<List<TreeList>> {
 
   factory TreeModel.fromJson(Map<String, dynamic> json) =>
       _$TreeModelFromJson(json);
-
   Map<String, dynamic> toJson() => _$TreeModelToJson(this);
 }
 

@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wanandroid/screen/project_page.dart';
 import 'package:wanandroid/screen/tree_page.dart';
 import 'package:wanandroid/utils/app_styles.dart';
 
@@ -24,10 +25,7 @@ class _BottomBarState
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     TreePage(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    ProjectPage(),
     Text(
       'Index 3: Settings',
       style: optionStyle,
