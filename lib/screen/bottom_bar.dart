@@ -8,6 +8,8 @@ import 'package:wanandroid/utils/app_styles.dart';
 
 import '../api/api.dart';
 import '../network/HttpUtil.dart';
+import 'article_detail.dart';
+import 'collect_page.dart';
 import 'hoem_page.dart';
 
 class BottomBar extends StatefulWidget {
@@ -81,14 +83,79 @@ class _BottomBarState extends State<BottomBar> {
 
   Widget showDrawer(BuildContext context) {
     return Drawer(
-      child: ListTile(
-        leading: const Icon(Icons.block),
-        title: const Text("退出"),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: () {
-          Navigator.of(context).pop();
-          showLogoutDialog(context);
-        },
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              currentAccountPicture: GestureDetector(
+                child: ClipOval(
+                  child: Image.network(
+                      "https://avatars.githubusercontent.com/u/19363761?s=96&v=4"),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+                },
+              ),
+              otherAccountsPictures: <Widget>[
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArticleDetail(
+                              title: "来都来了，点个star吧🌹",
+                              url: "https://github.com/Funnyyanne/wanandroid"),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.stars,
+                      color: Colors.white,
+                    ))
+              ],
+              accountName: const Text(
+                "EGAL",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+              ),
+              accountEmail:
+                  const Text("https://github.com/Funnyyanne/wanandroid")),
+
+          ///功能列表
+          ListTile(
+            leading: Icon(Icons.favorite_border),
+            title: Text("我的收藏"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CollectPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.share),
+            title: Text("我要分享"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              // Navigator.of(context).pop();
+              // Share.share(
+              //     '【玩安卓Flutter版】\nhttps://github.com/Funnyyanne/wanandroid');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.block),
+            title: const Text("退出"),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).pop();
+              showLogoutDialog(context);
+            },
+          )
+        ],
       ),
     );
   }
