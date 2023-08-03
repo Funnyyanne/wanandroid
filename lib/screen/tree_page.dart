@@ -84,7 +84,7 @@ class _TreePageState extends State<TreePage> {
                     contentPadding: const EdgeInsets.all(10.0),
                     title: Text(
                       treeList.name,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      style: TextStyle(color: Styles.color_black),
                     ),
                     //取随机icon
                     leading: Icon(_icons[Random().nextInt(_icons.length)]),

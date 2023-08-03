@@ -8,7 +8,7 @@ class Styles{
   static Color orangeColor = const Color(0xFFF37B67);
   static Color kakiColor = const Color(0xFFd2bdb6);
   ///颜色
-  static Color colorPrimary = Colors.red;
+  static Color colorPrimary = Colors.grey.shade800;
   static Color color_tags = const Color(0xFF009a61);
   static Color color_black = const Color(0xFF000000);
   static Color color_dark_gray = const Color(0xFF6b6b6b);

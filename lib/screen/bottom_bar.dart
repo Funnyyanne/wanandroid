@@ -40,7 +40,7 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomBar'),
+        title: const Text('WanAndroid'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -87,7 +87,7 @@ class _BottomBarState extends State<BottomBar> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              decoration: BoxDecoration(color: Styles.primaryColor),
               currentAccountPicture: GestureDetector(
                 child: ClipOval(
                   child: Image.network(

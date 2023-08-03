@@ -180,14 +180,14 @@ class _HomePageState extends State<HomePage>
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Theme.of(context).primaryColor,
+                          color: Styles.primaryColor,
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular((20.0)), // 圆角度
                       ),
                       child: Text(articleData[index].superChapterName,
                           style:
-                              TextStyle(color: Theme.of(context).primaryColor),
+                              TextStyle(color: Styles.primaryColor),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1)),
                   Container(

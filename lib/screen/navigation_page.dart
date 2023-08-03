@@ -73,7 +73,7 @@ class _NaviPageState extends State<NaviPage> {
   }
 
   Widget getRow(int position) {
-    Color textColor = Theme.of(context).primaryColor; //字体颜色
+    Color textColor = Colors.blueAccent; //字体颜色
     return GestureDetector(
       child: Container(
         alignment: Alignment.center,
@@ -84,7 +84,7 @@ class _NaviPageState extends State<NaviPage> {
                 left: BorderSide(
                     width: 5,
                     color: index == position
-                        ? Theme.of(context).primaryColor
+                        ? Colors.blueAccent
                         : Colors.white))),
         child: Text(
           _datas[position].name,
